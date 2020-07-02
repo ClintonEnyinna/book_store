@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/buyers/signup', to: 'buyers#new'
+  get '/sellers/signup', to: 'sellers#new'
+
+  resources :buyers
+  resources :sellers
 end
