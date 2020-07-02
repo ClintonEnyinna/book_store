@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'books#index'
+
   get '/buyers/signup', to: 'buyers#new'
   get '/sellers/signup', to: 'sellers#new'
 
