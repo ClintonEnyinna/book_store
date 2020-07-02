@@ -6,6 +6,7 @@ class Buyer < ApplicationRecord
 
   validates :name, :email, :address, presence: true
   validates :balance, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
   validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
