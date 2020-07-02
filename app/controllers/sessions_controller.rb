@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if @user&.authenticate(params[:session][:password])
       log_in(@user)
-      redirect_to '/'
+      redirect_to root_path
     else
       render 'new'
     end

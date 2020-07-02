@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   resources :buyers
   resources :sellers
+  resources :books
 end
