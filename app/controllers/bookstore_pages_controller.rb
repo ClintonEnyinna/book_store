@@ -11,8 +11,10 @@ class BookstorePagesController < ApplicationController
   end
 
   def buy
-    @books = current_user.books
+    @books = current_user.books.where(sold: false)
     @balance = current_user.balance
+    @app_earnings = AppEarning.instance
+
     @books&.each do |book|
       book.update(sold: true)
       @balance -= book.price
@@ -20,7 +22,8 @@ class BookstorePagesController < ApplicationController
         break
       else
         book.buyer.decrement!(:balance, book.price)
-        book.seller.increment!(:earnings, book.price)
+        book.seller.increment!(:earnings, book.price - 1)
+        @app_earnings.increment!(:earnings, 1)
       end
     end
     redirect_to root_path
