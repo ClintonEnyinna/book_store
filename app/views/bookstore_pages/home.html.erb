@@ -8,13 +8,15 @@
 
   <% @books.each do |book|%>
     <% if !book.sold %>
-      <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
-      <%= form_tag buyer_orders_path(current_user.id), method: :post do %>
-        <p>
-          <%= hidden_field_tag :book_id, book.id %>
-          <%= submit_tag "Add to Cart" %>
-        </p>
-      <% end %>
+      <div class="book-<%=book.id %>">
+        <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
+        <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
+          <p>
+            <%= hidden_field_tag :book_id, book.id %>
+            <%= submit_tag "Add to Cart" %>
+          </p>
+        <% end %>
+      </ div>
     <% end %>
   <% end %>
 <% else %>

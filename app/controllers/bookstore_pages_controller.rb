@@ -26,7 +26,7 @@ class BookstorePagesController < ApplicationController
         @app_earnings.increment!(:earnings, 1)
       end
     end
-    redirect_to root_path
+    redirect_to books_path
   end
 
   private

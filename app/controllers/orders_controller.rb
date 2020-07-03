@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     current_user.books << @book if @book
-    redirect_to root_path
   end
 
   def destroy
@@ -18,7 +17,6 @@ class OrdersController < ApplicationController
       @order = Order.find_by(book_id: params[:book_id])
       @order&.destroy
     end
-    redirect_to request.referer
   end
 
   private

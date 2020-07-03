@@ -1,11 +1,13 @@
 <% for book in @cart_books %>
-  <li><%= book.title %></li>
-  <%= form_tag buyer_order_path(current_user.id, book.order.id), method: :delete do %>
-    <p>
-      <%= hidden_field_tag :book_id, book.id %>
-      <%= submit_tag "Remove from Cart" %>
-    </p>
-  <% end %>
+  <div class="book-<%=book.id %>">
+    <li><%= book.title %></li>
+    <%= form_tag buyer_order_path(current_user.id, book.order.id), method: :delete, remote: true do %>
+      <p>
+        <%= hidden_field_tag :book_id, book.id %>
+        <%= submit_tag "Remove from Cart" %>
+      </p>
+    <% end %>
+  </div>
 <% end %>
 <% if @cart_books.count > 0 %>
   <%= form_tag '/checkout', method: :put do %>
