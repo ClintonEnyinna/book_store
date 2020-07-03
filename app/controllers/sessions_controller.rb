@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out unless current_user.nil?
-    redirect_to '/'
+    redirect_to root_path
   end
 end

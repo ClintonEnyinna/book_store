@@ -10,7 +10,8 @@ class Book < ApplicationRecord
     if search
       where('title LIKE ?', "%#{search}%")
     else
-      all
+      # returns books that don't have an order
+      left_outer_joins(:order).where(orders: { book_id: nil })
     end
   end
 end

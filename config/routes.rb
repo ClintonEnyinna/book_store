@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'books#index'
+  root 'bookstore_pages#home'
+
+  put '/checkout', to: 'bookstore_pages#buy'
 
   get '/buyers/signup', to: 'buyers#new'
   get '/sellers/signup', to: 'sellers#new'
@@ -8,7 +10,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :buyers
+  resources :buyers do
+    resources :orders
+  end
   resources :sellers
   resources :books
 end

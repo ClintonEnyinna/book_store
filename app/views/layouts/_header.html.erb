@@ -2,9 +2,14 @@
   <div>
     <%= link_to "Book Store", root_path %>
     <% if current_user %>
-      <%= current_user.name %>
-      <% if current_user.class.name == "Seller"%>
+     
+      <% if current_user.is_a?(Seller)%>
+        <%= link_to 'Profile',  seller_path(current_user) %>
         <%= link_to 'New Book', new_book_path %>
+      <% else %>
+        <%= link_to 'My Cart', buyer_orders_path(current_user.id) %>
+        <%= link_to 'My Books', books_path %>
+         <%= link_to 'Profile', buyer_path(current_user) %>
       <% end %>
       <%= link_to "Log out", logout_path, method: :delete %>
     <% end %>

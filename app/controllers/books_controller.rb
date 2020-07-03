@@ -1,14 +1,10 @@
 class BooksController < ApplicationController
   before_action :logged_in?
-  before_action :correct_user?, only: %i[new create]
+  before_action :check_for_buyers, only: %i[index update]
+  before_action :check_for_sellers, only: %i[new create]
 
   def index
-    @books = Book.search(params[:search])
-
-    if current_user.is_a?(Seller)
-      @registered_books = Book.where(seller_id: current_user.id)
-      @sold_books = @registered_books.where(sold: true)
-    end
+    @bought_books = current_user.books.where(sold: true)
   end
 
   def new
@@ -28,10 +24,6 @@ class BooksController < ApplicationController
 
   def logged_in?
     redirect_to login_path if current_user.nil?
-  end
-
-  def correct_user?
-    redirect_to root_path if current_user.is_a?(Buyer)
   end
 
   def book_params
