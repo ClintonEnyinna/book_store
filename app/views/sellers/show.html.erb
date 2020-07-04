@@ -1,1 +1,9 @@
-<span>earnings: <%= @seller.earnings %></span>
+<div class="container" style="width: 500px">
+  <h4 class="text-center my-5">My Information</h4>
+  <div>
+    <p class="my-4">Name: <span><%= @seller.name %></span></p>
+    <p class="my-4">Address: <span><%= @seller.phone %></span></p>
+    <p class="my-4">Email: <span><%= @seller.email %></span></p>
+    <p class="my-4">Earnings: <span class="text-success">$<%= @seller.earnings %></span></p>
+  </div>
+</div>

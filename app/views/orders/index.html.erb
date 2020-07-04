@@ -1,18 +1,29 @@
-<% for book in @cart_books %>
-  <div class="book-<%=book.id %>">
-    <li><%= book.title %></li>
-    <%= form_tag buyer_order_path(current_user.id, book.order.id), method: :delete, remote: true do %>
-      <p>
-        <%= hidden_field_tag :book_id, book.id %>
-        <%= submit_tag "Remove from Cart" %>
-      </p>
-    <% end %>
-  </div>
-<% end %>
+ <div class="row">
+  <% for book in @cart_books %>
+    <div class="col-sm-6 col-lg-4" id="book-<%=book.id %>">
+      <div class="card my-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= book.title.capitalize() %></h5>
+          <blockquote class="blockquote mb-0">
+            <footer class="blockquote-footer text-right"><cite title="Source Title"><%= book.author %></cite></footer>
+          </blockquote>
+          <div class="text-center mt-4">
+            <%= form_tag buyer_order_path(current_user.id, book.order.id), method: :delete, remote: true do %>
+              <p class="mb-0">
+                <%= hidden_field_tag :book_id, book.id %>
+                 <button type="submit" class="btn btn-outline-danger">Remove from Cart</button>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <% if @cart_books.count > 0 %>
   <%= form_tag '/checkout', method: :put do %>
     <p>
-      <%= submit_tag "Buy" %>
+      <%= submit_tag "Pay books", class: 'btn btn-success' %>
     </p>
   <% end %>
 <% end %>

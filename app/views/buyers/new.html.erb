@@ -1,34 +1,40 @@
-<%= form_for(@buyer) do |f| %>
+<div class="container" style="max-width: 500px">
+  <h4 class="text-center mt-5">Start buying, sign up!</h4>
+  <%= form_for(@buyer) do |f| %>
+    <% if @buyer.errors.any? %>
+      <div>
+        <ul>
+          <% @buyer.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <% if @buyer.errors.any? %>
-    <div>
-      <ul>
-        <% @buyer.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label 'email:' %>
+      <%= f.email_field :email, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label 'address:' %>
+      <%= f.text_field :address, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label 'password:' %>
+      <%= f.password_field :password, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label 'password_confirmation:' %>
+      <%= f.password_field :password_confirmation, class: 'form-control'%>
+    </div>
+    <div class="text-center">
+      <%= f.submit 'Sign up', class: 'btn btn-secondary mt-2 mb-5' %>
     </div>
   <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name%>
-  <br />
-
-  <%= f.label :email %>
-  <%= f.email_field :email%>
-  <br />
-
-  <%= f.label :address %>
-  <%= f.text_field :address%>
-  <br />
-
-  <%= f.label :password %>
-  <%= f.password_field :password%>
-  <br />
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation%>
-  <br />
-
-  <%= f.submit %>
-<% end %>
+  <p class="mb-1">Want to sell? <%= link_to "Sign up now!", new_seller_path %></p>
+  <small>Already have an account? <%= link_to "Log in", login_path %></small>
+</div>

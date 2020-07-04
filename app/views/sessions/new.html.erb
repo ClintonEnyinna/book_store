@@ -10,9 +10,12 @@
       <%= f.password_field :password, class: 'form-control' %>
     </div>
 
-    <%= f.submit 'Log in', class: 'btn btn-primary mb-3' %>
+    <div class="text-center">
+      <%= f.submit 'Log in', class: 'btn btn-secondary mt-2 mb-3' %>
+    </div>
+    
   <% end %>
    <h6 class="mt-4">New User? Sign Up!<h6/>
-   <span class="h6"><%= link_to "Buyer", new_buyer_path %></span> / <span class="h6"><%= link_to "Seller", new_seller_path %></span>
+   <span class="h6"><%= link_to "Buyer", new_buyer_path %></span> / <span class="h6"><%= link_to "Seller", new_seller_path %></span>.
   <br />
 </div>

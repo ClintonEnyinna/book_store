@@ -1,4 +1,15 @@
-<% for book in @bought_books %>
-  <%= book.title %>
-  <br />
-<% end %>
+<div class="row">
+  <% for book in @bought_books %>
+    <div class="col-sm-6 col-lg-4">
+      <div class="card my-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= book.title %></h5>
+          <blockquote class="blockquote mb-0">
+            <p><%= book.description %></p>
+            <footer class="blockquote-footer text-right"><cite title="Source Title"><%= book.author %></cite></footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

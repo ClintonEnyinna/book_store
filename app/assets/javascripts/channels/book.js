@@ -5,7 +5,7 @@ App.book = App.cable.subscriptions.create('BookChannel', {
   disconnected: function () {},
   received: function (data) {
     if (data['message'].method === 'create') {
-      const element = $(`.book-${data['message'].id}`)[0];
+      const element = $(`#book-${data['message'].id}`);
       if (element) element.remove();
     } else {
       let books = $('#books');

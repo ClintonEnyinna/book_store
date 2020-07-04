@@ -1,33 +1,81 @@
 <% if current_user.is_a?(Buyer)%>
-  <%= form_tag root_path, method: :get do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", name: nil %>
-    </p>
-  <% end %>
 
-  <div id="books">
+  <h2 class="mt-5 text-center">Welcome to Book Store!</h2>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 px-0">
+        <%= form_tag root_path, method: :get, class: 'mt-5' do %>
+          <div class="input-group">
+            <%= text_field_tag :search, params[:search], class: 'form-control' %>
+            <span class="input-group-btn">
+              <button type="submit", class="btn btn-secondary mb-2 ml-2">Search</button>
+            </span> 
+          </div> 
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5" id="books">
     <% @books.each do |book|%>
       <% if !book.sold %>
-        <div class="book-<%=book.id %>">
-          <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
-          <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
-            <p>
-              <%= hidden_field_tag :book_id, book.id %>
-              <%= submit_tag "Add to Cart" %>
-            </p>
-          <% end %>
+        <div class="col-sm-6 col-lg-4" id="book-<%=book.id %>">
+          <div class="card my-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= book.title.capitalize() %></h5>
+              <blockquote class="blockquote mb-0">
+                <p><%= book.description %></p>
+                <footer class="blockquote-footer text-right"><cite title="Source Title"><%= book.author %></cite></footer>
+              </blockquote>
+              <div class="text-center mt-4">
+                <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
+                  <p class="mb-0">
+                    <%= hidden_field_tag :book_id, book.id %>
+                    <button type="submit" class="btn btn-outline-success">Add to Cart</button>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       <% end %>
     <% end %>
   </div>
+
 <% else %>
-  <p>Registered Books</p>
-  <% @registered_books.each do |book| %>
-    <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
-  <% end %>
-  <p>Sold Books</p>
-  <% @sold_books.each do |book| %>
-    <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
-  <% end %>
+  <h4 class="mt-5 mb-3 text-center">Registered Books</h4>
+  <div class="row">
+    <% for book in @registered_books %>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card my-3" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <blockquote class="blockquote mb-0">
+              <p><%= book.description %></p>
+              <footer class="blockquote-footer text-right"><cite title="Source Title"><%= book.author %></cite></footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h4 class="mt-5 mb-3 text-center">Sold Books</h4>
+  <div class="row">
+    <% for book in @sold_books %>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card my-3" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= book.title %></h5>
+            <blockquote class="blockquote mb-0">
+              <p><%= book.description %></p>
+              <footer class="blockquote-footer text-right"><cite title="Source Title"><%= book.author %></cite></footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
+

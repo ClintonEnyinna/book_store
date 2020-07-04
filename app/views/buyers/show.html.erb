@@ -1,1 +1,9 @@
-<span>balance: <%= @buyer.balance %></span>
+<div class="container" style="width: 500px">
+  <h4 class="text-center my-5">My Information</h4>
+  <div>
+    <p class="my-4">Name: <span><%= @buyer.name %></span></p>
+    <p class="my-4">Address: <span><%= @buyer.address %></span></p>
+    <p class="my-4">Email: <span><%= @buyer.email %></span></p>
+    <p class="my-4">Balance: <span class="text-success">$<%= @buyer.balance %></span></p>
+  </div>
+</div>
