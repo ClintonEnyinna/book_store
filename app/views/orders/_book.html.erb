@@ -10,7 +10,7 @@
         <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
           <p class="mb-0">
             <%= hidden_field_tag :book_id, book.id %>
-            <%= submit_tag "Add to Cart", class: 'btn btn-success' %>
+            <button type="submit" class="btn btn-outline-success">Add to Cart</button>
           </p>
         <% end %>
       </div>

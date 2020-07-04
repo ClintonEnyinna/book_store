@@ -20,10 +20,10 @@
     </div>
   <% end %>
 </div>
-<% if @cart_books.count > 0 %>
-  <%= form_tag '/checkout', method: :put do %>
+<% if @cart_books.count.positive? %>
+  <%= form_tag '/checkout', method: :put, class: 'text-center mt-5' do %>
     <p>
-      <%= submit_tag "Pay books", class: 'btn btn-success' %>
+      <%= submit_tag "Buy", class: 'btn btn-success' %>
     </p>
   <% end %>
 <% end %>
