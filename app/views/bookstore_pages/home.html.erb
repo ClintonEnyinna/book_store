@@ -6,19 +6,21 @@
     </p>
   <% end %>
 
-  <% @books.each do |book|%>
-    <% if !book.sold %>
-      <div class="book-<%=book.id %>">
-        <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
-        <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
-          <p>
-            <%= hidden_field_tag :book_id, book.id %>
-            <%= submit_tag "Add to Cart" %>
-          </p>
-        <% end %>
-      </ div>
+  <div id="books">
+    <% @books.each do |book|%>
+      <% if !book.sold %>
+        <div class="book-<%=book.id %>">
+          <li><%= book.title.upcase %> - <%= book.author.capitalize %></li>
+          <%= form_tag buyer_orders_path(current_user.id), method: :post, remote: true do %>
+            <p>
+              <%= hidden_field_tag :book_id, book.id %>
+              <%= submit_tag "Add to Cart" %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% else %>
   <p>Registered Books</p>
   <% @registered_books.each do |book| %>
