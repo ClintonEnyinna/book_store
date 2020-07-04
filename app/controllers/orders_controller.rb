@@ -13,10 +13,10 @@ class OrdersController < ApplicationController
 
   def destroy
     @book = Book.find(params[:book_id])
-    unless @book.sold
-      @order = Order.find_by(book_id: params[:book_id])
-      @order&.destroy
-    end
+    return if @book.sold
+
+    @order = Order.find_by(book_id: params[:book_id])
+    @order&.destroy
   end
 
   private

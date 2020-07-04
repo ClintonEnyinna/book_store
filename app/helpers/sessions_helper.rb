@@ -4,11 +4,11 @@ module SessionsHelper
   end
 
   def current_user
-    if session[:email]
-      user_email = session[:email]
-      @current_user ||= Buyer.find_by(email: user_email) ||
-                        Seller.find_by(email: user_email)
-    end
+    return unless session[:email]
+
+    user_email = session[:email]
+    @current_user ||= Buyer.find_by(email: user_email) ||
+                      Seller.find_by(email: user_email)
   end
 
   def log_out

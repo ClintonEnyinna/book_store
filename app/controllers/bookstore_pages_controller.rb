@@ -4,10 +4,10 @@ class BookstorePagesController < ApplicationController
   def home
     @books = Book.search(params[:search])
 
-    if current_user.is_a?(Seller)
-      @registered_books = Book.where(seller_id: current_user.id)
-      @sold_books = @registered_books.where(sold: true)
-    end
+    return unless current_user.is_a?(Seller)
+
+    @registered_books = Book.where(seller_id: current_user.id)
+    @sold_books = @registered_books.where(sold: true)
   end
 
   def buy
@@ -17,14 +17,13 @@ class BookstorePagesController < ApplicationController
 
     @books&.each do |book|
       book.update(sold: true)
+
       @balance -= book.price
-      if @balance < 0
-        break
-      else
-        book.buyer.decrement!(:balance, book.price)
-        book.seller.increment!(:earnings, book.price - 1)
-        @app_earnings.increment!(:earnings, 1)
-      end
+      break if @balance.negative?
+
+      book.buyer.decrement!(:balance, book.price)
+      book.seller.increment!(:earnings, book.price - 1)
+      @app_earnings.increment!(:earnings, 1)
     end
     redirect_to books_path
   end

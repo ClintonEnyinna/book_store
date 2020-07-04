@@ -14,7 +14,11 @@ RSpec.describe 'Buyers', type: :request do
     end
 
     it 'goes to home on successful signup' do
-      post '/buyers', params: { buyer: { name: 'Clinton', email: 'clin@ton.com', address: 'worldwide', password: 'foobar', password_confirmation: 'foobar' } }
+      post '/buyers', params: { buyer: { name: 'Clinton',
+                                         email: 'clin@ton.com',
+                                         address: 'worldwide',
+                                         password: 'foobar',
+                                         password_confirmation: 'foobar' } }
 
       expect(response).to redirect_to('/')
       follow_redirect!
