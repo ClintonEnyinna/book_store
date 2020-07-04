@@ -1,17 +1,18 @@
-<h1>Log In</h1>
+<div class="container" style="max-width: 500px">
+  <h4 class="text-center mt-5">Log In</h4>
+  <%= form_for(:session, url: login_path) do |f| %>
+    <div class="form-group">
+      <%= f.label 'email:' %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label 'password:' %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
 
-<%= form_for(:session, url: login_path) do |f| %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+    <%= f.submit 'Log in', class: 'btn btn-primary mb-3' %>
+  <% end %>
+   <h6 class="mt-4">New User? Sign Up!<h6/>
+   <span class="h6"><%= link_to "Buyer", new_buyer_path %></span> / <span class="h6"><%= link_to "Seller", new_seller_path %></span>
   <br />
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br />
-
-  <%= f.submit 'Log In' %>
-<% end %>
-<%= link_to 'Sign up as buyer', new_buyer_path %>
-<br />
-<%= link_to 'Sign up as seller', new_seller_path %>
+</div>
